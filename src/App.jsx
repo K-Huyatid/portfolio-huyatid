@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 
+const App = () => {
 return (
   <div className="min-h-screen bg-gray-100">
     {/* Header */}
@@ -54,6 +55,6 @@ return (
     </footer>
   </div>
 );
-
+}
 
 export default App;
