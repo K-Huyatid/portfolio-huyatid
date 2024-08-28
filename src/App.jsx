@@ -5,8 +5,8 @@ function App() {
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const getRandomPosition = () => {
-    const randomTop = Math.floor(Math.random() * 80); // random value between 0% and 80%
-    const randomLeft = Math.floor(Math.random() * 80); // random value between 0% and 80%
+    const randomTop = Math.floor(Math.random() * 110); // random value between 0% and 80%
+    const randomLeft = Math.floor(Math.random() * 110); // random value between 0% and 80%
     return { top: `${randomTop}%`, left: `${randomLeft}%` };
   };
 
@@ -20,7 +20,7 @@ function App() {
       style={{ position: 'absolute', top: position.top, left: position.left }}
       onMouseOver={handleMouseOver}
     >
-      Hello world!
+      Hello world! Test
     </div>
   );
 }
