@@ -16,7 +16,7 @@ return (
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">About Me</h2>
         <p className="text-gray-600">
-          I am a passionate web developer with experience in creating dynamic and responsive websites using modern technologies like React, Vite, and TailwindCSS.
+          I am a passionate web developer witgh experience in creating dynamic and responsive websites using modern technologies like React, Vite, and TailwindCSS.
         </p>
       </section>
 
