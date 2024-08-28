@@ -20,7 +20,7 @@ function App() {
       style={{ position: 'absolute', top: position.top, left: position.left }}
       onMouseOver={handleMouseOver}
     >
-      Hello world! Test
+      Hello world! Test Test
     </div>
   );
 }
