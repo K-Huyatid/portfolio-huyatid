@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import Header from './header';
+import Header from './Header';
 import lightBackground from './assets/1699671232418586.png';
 import darkBackground from './assets/641430.jpg';
 
