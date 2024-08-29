@@ -28,16 +28,22 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalDescription, setModalDescription] = useState('');
   const modalRef = useRef(null);
 
-  const openModal = (image) => {
+  const openModal = (image, title, description) => {
     setModalImage(image);
+    setModalTitle(title);
+    setModalDescription(description);
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
     setModalImage('');
+    setModalTitle('');
+    setModalDescription('');
   };
 
   // Close modal when clicking outside of it
@@ -68,14 +74,14 @@ function App() {
 
       <div className="relative min-h-screen flex flex-col">
         <div className="flex-1 bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 text-gray-900 dark:text-gray-100 px-4 md:px-8 lg:px-12 mx-auto max-w-6xl pt-[80px]">
-          <section className="mb-10 text-center">
+          <section className="mb-5 text-center">
             <h2 className="text-4xl font-bold mb-4">Hello!</h2>
             <p className="text-lg md:text-xl font-medium">
-              Welcome to my portfolio! I am Kyle Miguel Huyatid, an Information Technology student of the University of Mindanao.
+              Welcome to my portfolio! I am Kyle Miguel Huyatid, an Information Technology student at the University of Mindanao. Here you'll find my achievements and the projects I've worked on throughout my academic career. You may contact me through the links below!
             </p>
           </section>
 
-          <section className="mb-10 text-center">
+          <section className="mb-20 text-center">
             <div className="flex justify-center gap-4 py-2">
               <a href="https://github.com/K-Huyatid" target="_blank" rel="noopener noreferrer">
                 <img src={darkMode ? githubLight : githubDark} alt="GitHub" className="w-10 h-10 rounded-full cursor-pointer" />
@@ -90,7 +96,8 @@ function App() {
           </section>
 
           {/* Resume Section */}
-          <section className="mb-10 flex flex-col items-center">
+          <section className="mb-20 flex flex-col items-center">
+            <h2 className="text-4xl font-bold mb-4">Resume</h2>
             <div className="w-6/12 max-w-screen-lg border-4 border-gray-300 dark:border-gray-600 shadow-lg rounded-lg overflow-hidden">
               <img src={resume} alt="Resume" className="w-full h-auto object-contain" />
             </div>
@@ -114,18 +121,18 @@ function App() {
           </section>
 
           {/* Certifications Section */}
-          <section className="mb-10">
-            <h2 className="text-3xl font-semibold mb-4">Certifications</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNetwork)}>
+          <section className="mb-20">
+            <h2 className="text-3xl font-semibold mb-6">Certifications</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNetwork, 'IT Specialist in Networking', 'Description of IT Specialist in Networking')}>
                 <img src={certNetwork} alt="Certificate 1" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">IT Specialist in Networking</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certSecu)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certSecu, 'IT Specialist in Network Security', 'Description of IT Specialist in Network Security')}>
                 <img src={certSecu} alt="Certificate 2" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">IT Specialist in Network Security</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNC2)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNC2, 'NC2 in Computer Systems Servicing', 'Description of NC2 in Computer Systems Servicing')}>
                 <img src={certNC2} alt="Certificate 3" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">NC2 in Computer Systems Servicing</h3>
               </div>
@@ -133,30 +140,30 @@ function App() {
           </section>
 
           {/* Certificates Section */}
-          <section className="mb-10">
-            <h2 className="text-3xl font-semibold mb-4">Certificates</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cert2024)}>
+          <section className="mb-20">
+            <h2 className="text-3xl font-semibold mb-6">Certificates</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cert2024, '2024 UM 3rd Honors', 'Description of 2024 UM 3rd Honors')}>
                 <img src={cert2024} alt="Certificate 1" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">2024 UM 3rd Honors</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cert2022)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cert2022, '2022 UM 2nd Honors', 'Description of 2022 UM 2nd Honors')}>
                 <img src={cert2022} alt="Certificate 2" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">2022 UM 2nd Honors</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certcyf)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certcyf, 'Stacktrek Python Workshop', 'Description of Stacktrek Python Workshop')}>
                 <img src={certcyf} alt="Certificate 3" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">Stacktrek Python Workshop</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cheddeploy)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cheddeploy, 'CHED Deployment', 'Description of CHED Deployment')}>
                 <img src={cheddeploy} alt="Certificate 4" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">CHED Deployment</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(chedaccept)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(chedaccept, 'CHED Acceptance', 'Description of CHED Acceptance')}>
                 <img src={chedaccept} alt="Certificate 5" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">CHED Acceptance</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certpublic)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certpublic, 'Public Presentation', 'Description of Public Presentation')}>
                 <img src={certpublic} alt="Certificate 6" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">Public Presentation</h3>
               </div>
@@ -164,52 +171,57 @@ function App() {
           </section>
 
           {/* Projects Section */}
-          <section className="mb-16">
-            <h2 className="text-3xl font-semibold mb-4">Projects</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNetwork)}>
+          <section className="mb-20">
+            <h2 className="text-3xl font-semibold mb-6">Projects</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNetwork, 'HEMISense', 'A Higher Education Management Information System created for the Commission on Higher Education Regional Office XI as my Capstone Research Project. The system is currently under patent processing. No public repository available for privacy reasons.')}>
                 <img src={certNetwork} alt="Project 1" className="w-full h-40 object-cover mb-2 rounded-md" />
-                <h3 className="text-lg font-semibold">Project 1</h3>
-                <p className="text-sm">Description of the project goes here.</p>
+                <h3 className="text-lg font-semibold">HEMISense</h3>
+                <p className="text-sm">An Information Management System for CHEDRO XI.</p>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certSecu)}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certSecu, 'Project 2', 'Description of Project 2')}>
                 <img src={certSecu} alt="Project 2" className="w-full h-40 object-cover mb-2 rounded-md" />
-                <h3 className="text-lg font-semibold">Project 2</h3>
-                <p className="text-sm">Description of the project goes here.</p>
+                <h3 className="text-lg font-semibold">JBR Booking and Sales</h3>
+                <p className="text-sm">A booking and sales system for Joan Beach Resort.</p>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNC2)}>
-                <img src={certNC2} alt="Project 3" className="w-full h-40 object-cover mb-2 rounded-md" />
-                <h3 className="text-lg font-semibold">Project 3</h3>
-                <p className="text-sm">Description of the project goes here.</p>
-              </div>
+              <div
+  className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer"
+  onClick={() => openModal(certNC2, 'Project 3', 'Description of Project 3. Check out the prototype <a href="https://www.figma.com/proto/Vjfo0C6gYnRljVazOIzdSa/Prototype" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">here</a>.')}>
+  <img src={certNC2} alt="Project 3" className="w-full h-40 object-cover mb-2 rounded-md" />
+  <h3 className="text-lg font-semibold">CommutePro</h3>
+  <p className="text-sm">A prototype for a commuting app.</p>
+</div>
+
             </div>
           </section>
         </div>
 
-        <footer className="bg-gray-200 dark:bg-gray-800 p-5 text-center text-gray-900 dark:text-gray-100 mt-10">
+        <footer className="bg-gray-200 dark:bg-gray-800 p-5 text-center text-gray-900 dark:text-gray-100 mt-0">
           <p>&copy; 2024 Kyle Miguel Huyatid All Rights Reserved</p>
         </footer>
       </div>
 
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Certificate Modal"
-        className="fixed inset-0 flex items-center justify-center z-60" // Ensure z-index is higher
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-      >
-        <div ref={modalRef} className="relative bg-white dark:bg-gray-900 p-4 border border-gray-300 dark:border-gray-600 shadow-lg rounded-lg max-w-3xl mx-auto max-h-screen overflow-auto">
-          <button
-            onClick={closeModal}
-            className="absolute top-2 right-2 bg-gray-200 dark:bg-gray-700 p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-          <img src={modalImage} alt="Certificate" className="max-w-full max-h-screen object-contain" />
-        </div>
-      </Modal>
+  isOpen={modalIsOpen}
+  onRequestClose={closeModal}
+  contentLabel="Certificate Modal"
+  className={`fixed inset-0 flex items-center justify-center z-60 ${darkMode ? 'dark' : ''}`} 
+  overlayClassName={`fixed inset-0 ${darkMode ? 'bg-black bg-opacity-70' : 'bg-black bg-opacity-50'}`}>
+  <div ref={modalRef} className={`relative p-4 border shadow-lg rounded-lg max-w-3xl mx-auto max-h-screen overflow-auto ${darkMode ? 'bg-gray-900 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}>
+    <button
+      onClick={closeModal}
+      className={`absolute top-2 right-2 p-2 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} focus:outline-none`}>
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <img src={modalImage} alt="Certificate" className="w-full h-auto object-contain" />
+    <div className="mt-4 text-center">
+      <h3 className="text-xl font-semibold">{modalTitle}</h3>
+      <p className="text-sm mt-2" dangerouslySetInnerHTML={{ __html: modalDescription }} />
+    </div>
+  </div>
+</Modal>
     </div>
   );
 }
