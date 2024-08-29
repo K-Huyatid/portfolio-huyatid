@@ -1,60 +1,85 @@
 import { useState } from 'react';
 import './App.css';
+import Header from './header';
+import lightBackground from './assets/1699671232418586.png';
+import darkBackground from './assets/641430.jpg';
 
-const App = () => {
-return (
-  <div className="min-h-screen bg-gray-100">
-    {/* Header */}
-    <header className="bg-white shadow">
-      <div className="container mx-auto px-4 py-6">
-        <h1 className="text-3xl font-bold text-gray-800">My Portfolio</h1>
+function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
+    <div className={darkMode ? 'dark' : ''}>
+      {/* Header Component */}
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+
+      {/* Parallax Background Layer */}
+      <div 
+        className={`fixed top-0 left-0 w-full h-screen bg-fixed bg-cover bg-center z-0 background-transition`}
+        style={{ backgroundImage: `url(${darkMode ? darkBackground : lightBackground})` }}>
       </div>
-    </header>
 
-    {/* Main Content */}
-    <main className="container mx-auto px-4 py-8">
-      {/* About Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">About Me</h2>
-        <p className="text-gray-600">
-          I am a passionate web developer witgh experience in creating dynamic and responsive websites using modern technologies like React, Vite, and TailwindCSS.
-        </p>
-      </section>
+      {/* Main Content Layer */}
+      <div className="relative min-h-screen flex flex-col">
+        {/* Content Wrapper */}
+        <div className="flex-1 bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 text-gray-900 dark:text-gray-100 px-4 md:px-8 lg:px-12 mx-auto max-w-6xl pt-[80px]">
+          {/* Profile Section */}
+          <section className="mb-10">
+            <h2 className="text-3xl font-semibold mb-4">Profile</h2>
+            <p className="text-lg">
+              {/* Add your profile content here */}
+              Welcome to my portfolio! I am a [Your Profession] with experience in [Your Skills/Expertise]. 
+              My work focuses on [Your Work Focus]. Feel free to explore my projects and certificates below.
+            </p>
+          </section>
 
-      {/* Projects Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold text-gray-800">Project 1</h3>
-            <p className="text-gray-600">Description of the first project.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold text-gray-800">Project 2</h3>
-            <p className="text-gray-600">Description of the second project.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold text-gray-800">Project 3</h3>
-            <p className="text-gray-600">Description of the third project.</p>
-          </div>
+          {/* Certificates Section */}
+          <section className="mb-10">
+            <h2 className="text-3xl font-semibold mb-4">Certificates</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-lg font-semibold">Certificate 1</h3>
+                <p className="text-sm">Details about Certificate 1.</p>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-lg font-semibold">Certificate 2</h3>
+                <p className="text-sm">Details about Certificate 2.</p>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-lg font-semibold">Certificate 3</h3>
+                <p className="text-sm">Details about Certificate 3.</p>
+              </div>
+              {/* Add more certificates as needed */}
+            </div>
+          </section>
+
+          {/* Projects Section */}
+          <section>
+            <h2 className="text-3xl font-semibold mb-4">Projects</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-lg font-semibold">Project 1</h3>
+                <p className="text-sm">Description of the project goes here.</p>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-lg font-semibold">Project 2</h3>
+                <p className="text-sm">Description of the project goes here.</p>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
+                <h3 className="text-lg font-semibold">Project 3</h3>
+                <p className="text-sm">Description of the project goes here.</p>
+              </div>
+              {/* Add more projects as needed */}
+            </div>
+          </section>
         </div>
-      </section>
 
-      {/* Contact Section */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Contact</h2>
-        <p className="text-gray-600">Feel free to reach out via email at <a href="mailto:youremail@example.com" className="text-blue-500">youremail@example.com</a>.</p>
-      </section>
-    </main>
-
-    {/* Footer */}
-    <footer className="bg-gray-800 text-white py-6">
-      <div className="container mx-auto px-4 text-center">
-        <p>&copy; {new Date().getFullYear()} My Portfolio. All rights reserved.</p>
+        {/* Footer Banner */}
+        <footer className="bg-gray-200 dark:bg-gray-800 p-5 text-center text-gray-900 dark:text-gray-100">
+          <p>&copy; 2024 My Portfolio</p>
+        </footer>
       </div>
-    </footer>
-  </div>
-);
+    </div>
+  );
 }
 
 export default App;
