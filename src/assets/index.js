@@ -15,7 +15,16 @@ import cheddeploy from './cheddeploy.jpg';
 import certpublic from './certpublic.jpg';
 import chedaccept from './chedaccept.jpg';
 import certcyf from './certCYF.jpg';
-
+import compro1 from './compro1.png';
+import compro2 from './compro2.png';
+import compro3 from './compro3.png';
+import compro4 from './compro4.png';
+import hemis1 from './hemis1.png';
+import hemis2 from './hemis2.png';
+import hemis3 from './hemis3.png';
+import hemis4 from './hemis4.png';
+import jbr1 from './jbr1.png';
+import jbr2 from './jbr2.png';
 
 export {
   githubLight,
@@ -33,5 +42,15 @@ export {
   cheddeploy,
   certcyf,
   certpublic,
-  chedaccept
+  chedaccept,
+  compro1,
+  compro2,
+  compro3,
+  compro4,
+  hemis1,
+  hemis2,
+  hemis3,
+  hemis4,
+  jbr1,
+  jbr2
 };

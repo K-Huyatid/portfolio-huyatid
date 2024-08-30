@@ -2,15 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 import Modal from 'react-modal';
 import './App.css';
 import Header from './Header';
-import { 
-  githubLight, 
-  githubDark, 
-  linkedin, 
-  gmail, 
-  lightBackground, 
-  darkBackground, 
-  certNetwork, 
-  certSecu, 
+import {
+  githubLight,
+  githubDark,
+  linkedin,
+  gmail,
+  lightBackground,
+  darkBackground,
+  certNetwork,
+  certSecu,
   certNC2,
   resume,
   cert2022,
@@ -18,7 +18,17 @@ import {
   certpublic,
   certcyf,
   chedaccept,
-  cheddeploy
+  cheddeploy,
+  compro1,
+  compro2,
+  compro3,
+  compro4,
+  hemis1,
+  hemis2,
+  hemis3,
+  hemis4,
+  jbr1,
+  jbr2
 } from './assets';
 
 // Set app element for accessibility
@@ -27,24 +37,41 @@ Modal.setAppElement('#root');
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [modalImage, setModalImage] = useState('');
+  const [modalImages, setModalImages] = useState([]);
   const [modalTitle, setModalTitle] = useState('');
   const [modalDescription, setModalDescription] = useState('');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const modalRef = useRef(null);
 
-  const openModal = (image, title, description) => {
-    setModalImage(image);
+  const hemisImages = [hemis1, hemis2, hemis3, hemis4];
+  const jbrImages = [jbr1, jbr2];
+  const comproImages = [compro1, compro2, compro3, compro4];
+
+  const openModal = (images, title, description) => {
+    setModalImages(images);
     setModalTitle(title);
     setModalDescription(description);
+    setCurrentImageIndex(0); // Start from the first image
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setModalImage('');
+    setModalImages([]);
     setModalTitle('');
     setModalDescription('');
   };
+
+  // Cycle through images for the modal
+  useEffect(() => {
+    let interval;
+    if (modalIsOpen && modalImages.length > 0) {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % modalImages.length);
+      }, 10000); // Change image every 10 seconds
+    }
+    return () => clearInterval(interval); // Cleanup interval on unmount or modal close
+  }, [modalIsOpen, modalImages]);
 
   // Close modal when clicking outside of it
   useEffect(() => {
@@ -67,14 +94,14 @@ function App() {
     <div className={darkMode ? 'dark' : ''}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      <div 
+      <div
         className={`fixed top-0 left-0 w-full h-screen bg-fixed bg-cover bg-center z-0 background-transition`}
         style={{ backgroundImage: `url(${darkMode ? darkBackground : lightBackground})` }}>
       </div>
 
       <div className="relative min-h-screen flex flex-col">
         <div className="flex-1 bg-white bg-opacity-80 dark:bg-gray-900 dark:bg-opacity-80 text-gray-900 dark:text-gray-100 px-4 md:px-8 lg:px-12 mx-auto max-w-6xl pt-[80px]">
-          <section className="mb-5 text-center">
+          <section id="profile" className="mb-5 text-center">
             <h2 className="text-4xl font-bold mb-4">Hello!</h2>
             <p className="text-lg md:text-xl font-medium">
               Welcome to my portfolio! I am Kyle Miguel Huyatid, an Information Technology student at the University of Mindanao. Here you'll find my achievements and the projects I've worked on throughout my academic career. You may contact me through the links below!
@@ -96,8 +123,10 @@ function App() {
           </section>
 
           {/* Resume Section */}
-          <section className="mb-20 flex flex-col items-center">
-            <h2 className="text-4xl font-bold mb-4">Resume</h2>
+          <section id="resume" className="mb-20 flex flex-col items-center">
+          <div className={`bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-4 border-2 ${darkMode ? 'border-white' : 'border-black'}`}>
+  <h2 className="text-3xl font-bold mb-3">RESUME</h2>
+</div>
             <div className="w-6/12 max-w-screen-lg border-4 border-gray-300 dark:border-gray-600 shadow-lg rounded-lg overflow-hidden">
               <img src={resume} alt="Resume" className="w-full h-auto object-contain" />
             </div>
@@ -121,18 +150,20 @@ function App() {
           </section>
 
           {/* Certifications Section */}
-          <section className="mb-20">
-            <h2 className="text-3xl font-semibold mb-6">Certifications</h2>
+          <section id="certifications" className="mb-20">
+          <div className={`bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-4 border-2 ${darkMode ? 'border-white' : 'border-black'}`}>
+            <h2 className="text-3xl font-semibold mb-3">CERTIFICATIONS</h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNetwork, 'IT Specialist in Networking', 'Description of IT Specialist in Networking')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([certNetwork], 'IT Specialist in Networking')}>
                 <img src={certNetwork} alt="Certificate 1" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">IT Specialist in Networking</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certSecu, 'IT Specialist in Network Security', 'Description of IT Specialist in Network Security')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([certSecu], 'IT Specialist in Network Security')}>
                 <img src={certSecu} alt="Certificate 2" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">IT Specialist in Network Security</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNC2, 'NC2 in Computer Systems Servicing', 'Description of NC2 in Computer Systems Servicing')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([certNC2], 'NC2 in Computer Systems Servicing')}>
                 <img src={certNC2} alt="Certificate 3" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">NC2 in Computer Systems Servicing</h3>
               </div>
@@ -140,30 +171,32 @@ function App() {
           </section>
 
           {/* Certificates Section */}
-          <section className="mb-20">
-            <h2 className="text-3xl font-semibold mb-6">Certificates</h2>
+          <section id="certificates" className="mb-20">
+          <div className={`bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-4 border-2 ${darkMode ? 'border-white' : 'border-black'}`}>
+            <h2 className="text-3xl font-semibold mb-3">CERTIFICATES</h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cert2024, '2024 UM 3rd Honors', 'Description of 2024 UM 3rd Honors')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([cert2024], '2024 UM 3rd Honors')}>
                 <img src={cert2024} alt="Certificate 1" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">2024 UM 3rd Honors</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cert2022, '2022 UM 2nd Honors', 'Description of 2022 UM 2nd Honors')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([cert2022], '2022 UM 2nd Honors')}>
                 <img src={cert2022} alt="Certificate 2" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">2022 UM 2nd Honors</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certcyf, 'Stacktrek Python Workshop', 'Description of Stacktrek Python Workshop')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([certcyf], 'Stacktrek Python Workshop')}>
                 <img src={certcyf} alt="Certificate 3" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">Stacktrek Python Workshop</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(cheddeploy, 'CHED Deployment', 'Description of CHED Deployment')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([cheddeploy], 'CHED Deployment')}>
                 <img src={cheddeploy} alt="Certificate 4" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">CHED Deployment</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(chedaccept, 'CHED Acceptance', 'Description of CHED Acceptance')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([chedaccept], 'CHED Acceptance')}>
                 <img src={chedaccept} alt="Certificate 5" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">CHED Acceptance</h3>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certpublic, 'Public Presentation', 'Description of Public Presentation')}>
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal([certpublic], 'Public Presentation')}>
                 <img src={certpublic} alt="Certificate 6" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">Public Presentation</h3>
               </div>
@@ -171,27 +204,30 @@ function App() {
           </section>
 
           {/* Projects Section */}
-          <section className="mb-20">
-            <h2 className="text-3xl font-semibold mb-6">Projects</h2>
+          <section id="projects" className="mb-20">
+          <div className={`bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-4 border-2 ${darkMode ? 'border-white' : 'border-black'}`}>
+            <h2 className="text-3xl font-semibold mb-3">PROJECTS</h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certNetwork, 'HEMISense', 'A Higher Education Management Information System created for the Commission on Higher Education Regional Office XI as my Capstone Research Project. The system is currently under patent processing. No public repository available for privacy reasons.')}>
-                <img src={certNetwork} alt="Project 1" className="w-full h-40 object-cover mb-2 rounded-md" />
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(hemisImages, 'HEMISense', 'A Higher Education Management Information System created for the Commission on Higher Education Regional Office XI as my Capstone Research Project. The system is currently under patent processing.')}>
+                <img src={hemis1} alt="Project 1" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">HEMISense</h3>
                 <p className="text-sm">An Information Management System for CHEDRO XI.</p>
               </div>
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" onClick={() => openModal(certSecu, 'Project 2', 'Description of Project 2')}>
-                <img src={certSecu} alt="Project 2" className="w-full h-40 object-cover mb-2 rounded-md" />
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer" 
+              onClick={() => openModal(jbrImages, 'JBR Booking and Sales', 'A booking and sales system for Joan Beach Resort.')}>
+                <img src={jbr1} alt="Project 2" className="w-full h-40 object-cover mb-2 rounded-md" />
                 <h3 className="text-lg font-semibold">JBR Booking and Sales</h3>
                 <p className="text-sm">A booking and sales system for Joan Beach Resort.</p>
               </div>
               <div
-  className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer"
-  onClick={() => openModal(certNC2, 'Project 3', 'Description of Project 3. Check out the prototype <a href="https://www.figma.com/proto/Vjfo0C6gYnRljVazOIzdSa/Prototype" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">here</a>.')}>
-  <img src={certNC2} alt="Project 3" className="w-full h-40 object-cover mb-2 rounded-md" />
-  <h3 className="text-lg font-semibold">CommutePro</h3>
-  <p className="text-sm">A prototype for a commuting app.</p>
-</div>
-
+                className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow cursor-pointer"
+                onClick={() => openModal(comproImages, 'CommutePro', 'A prototype for a commuting app. Check out the prototype <a href="https://www.figma.com/proto/Vjfo0C6gYnRljVazOIzdSa/Prototype" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">here</a>.')}
+              >
+                <img src={compro1} alt="Project 3" className="w-full h-40 object-cover mb-2 rounded-md" />
+                <h3 className="text-lg font-semibold">CommutePro</h3>
+                <p className="text-sm">A prototype for a commuting app.</p>
+              </div>
             </div>
           </section>
         </div>
@@ -204,18 +240,37 @@ function App() {
       <Modal
   isOpen={modalIsOpen}
   onRequestClose={closeModal}
-  contentLabel="Certificate Modal"
-  className={`fixed inset-0 flex items-center justify-center z-60 ${darkMode ? 'dark' : ''}`} 
+  contentLabel="Project Modal"
+  className={`fixed inset-0 flex items-center justify-center z-60 ${darkMode ? 'dark' : ''}`}
   overlayClassName={`fixed inset-0 ${darkMode ? 'bg-black bg-opacity-70' : 'bg-black bg-opacity-50'}`}>
   <div ref={modalRef} className={`relative p-4 border shadow-lg rounded-lg max-w-3xl mx-auto max-h-screen overflow-auto ${darkMode ? 'bg-gray-900 border-gray-600 text-gray-100' : 'bg-white border-gray-300 text-gray-900'}`}>
+    {/* Close button */}
     <button
       onClick={closeModal}
-      className={`absolute top-2 right-2 p-2 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} focus:outline-none`}>
+      className={`absolute top-2 right-2 p-2 rounded-full ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} focus:outline-none z-50`}>
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
-    <img src={modalImage} alt="Certificate" className="w-full h-auto object-contain" />
+
+    {/* Modal content */}
+    <div className="relative">
+      <img src={modalImages[currentImageIndex]} alt={modalTitle} className="w-full h-auto object-contain" />
+      {modalImages.length > 1 && (
+        <div className="absolute inset-0 flex justify-between items-center p-4">
+          <button
+            onClick={() => setCurrentImageIndex((currentImageIndex - 1 + modalImages.length) % modalImages.length)}
+            className={`text-white ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} p-2 rounded-full`}>
+            &lt;
+          </button>
+          <button
+            onClick={() => setCurrentImageIndex((currentImageIndex + 1) % modalImages.length)}
+            className={`text-white ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} p-2 rounded-full`}>
+            &gt;
+          </button>
+        </div>
+      )}
+    </div>
     <div className="mt-4 text-center">
       <h3 className="text-xl font-semibold">{modalTitle}</h3>
       <p className="text-sm mt-2" dangerouslySetInnerHTML={{ __html: modalDescription }} />
