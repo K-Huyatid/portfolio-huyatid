@@ -25,6 +25,7 @@ import hemis3 from './hemis3.png';
 import hemis4 from './hemis4.png';
 import jbr1 from './jbr1.png';
 import jbr2 from './jbr2.png';
+import skype from './Skype_logo.vsg';
 
 export {
   githubLight,
@@ -52,5 +53,6 @@ export {
   hemis3,
   hemis4,
   jbr1,
-  jbr2
+  jbr2,
+  skype
 };

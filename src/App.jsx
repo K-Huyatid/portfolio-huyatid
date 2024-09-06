@@ -28,7 +28,8 @@ import {
   hemis3,
   hemis4,
   jbr1,
-  jbr2
+  jbr2,
+  skype
 } from './assets';
 
 // Set app element for accessibility
@@ -118,6 +119,12 @@ function App() {
               </a>
               <a href="mailto:huyatidkyle@gmail.com" target="_blank" rel="noopener noreferrer">
                 <img src={gmail} alt="Gmail" className="w-10 h-10 rounded-full cursor-pointer" />
+              </a>
+              <a href="https://www.linkedin.com/in/kyle-huyatid-850059325/" target="_blank" rel="noopener noreferrer">
+                <img src={linkedin} alt="LinkedIn" className="w-10 h-10 rounded-full cursor-pointer" />
+              </a>
+              <a href="https://join.skype.com/invite/roAjLzfr4Ve2" target="_blank" rel="noopener noreferrer">
+                <img src={skype} alt="Skype" className="w-10 h-10 rounded-full cursor-pointer" />
               </a>
             </div>
           </section>
